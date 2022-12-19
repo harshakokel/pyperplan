@@ -32,7 +32,9 @@ from .task import Operator, Task
 verbose_logging = False
 
 
-def ground(problem):
+def ground(
+    problem, remove_statics_from_initial_state=True, remove_irrelevant_operators=True
+):
     """
     This is the main method that grounds the PDDL task and returns an
     instance of the task.Task class.
@@ -95,12 +97,14 @@ def ground(problem):
         logging.debug("All grounded facts:\n%s" % facts)
 
     # Remove statics from initial state
-    init &= facts
-    if verbose_logging:
-        logging.debug("Initial state without statics:\n%s" % init)
+    if remove_statics_from_initial_state:
+        init &= facts
+        if verbose_logging:
+            logging.debug("Initial state without statics:\n%s" % init)
 
     # perform relevance analysis
-    operators = _relevance_analysis(operators, goals)
+    if remove_irrelevant_operators:
+        operators = _relevance_analysis(operators, goals)
 
     name = problem.name
     return Task(name, facts, init, goals, operators)
@@ -241,7 +245,7 @@ def _find_pred_in_init(pred_name, param, sig_pos, init):
     """
     match_init = None
     if sig_pos == 0:
-        match_init = re.compile(fr"\({pred_name} {param}.*")
+        match_init = re.compile(rf"\({pred_name} {param}.*")
     else:
         reg_ex = r"\(%s\s+" % pred_name
         reg_ex += r"[\w\d-]+\s+" * sig_pos

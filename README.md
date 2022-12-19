@@ -11,37 +11,31 @@ is published under the terms of the GNU General Public License 3
 (GPLv3).
 
 Pyperplan supports the following PDDL fragment: STRIPS without action
-costs. This file only gives the basic information to get you up and
-running. The full documentation can be found in the doc directory. You
-can either read the text file documentation.txt directly or run "make"
-in the doc directory to convert it to a PDF document.
+costs.
 
 # Requirements
 
-Pyperplan requires Python >= 3.6. If Python 3 is not installed on your
-system, install it with your package manager or download it from
-<https://python.org>. For example,
-
-    sudo apt install python3
-
-will install Python 3 on an Ubuntu system.
+Pyperplan requires [Python](https://python.org) >= 3.6.
 
 # Installation
 
-In addition to running the planner directly from a repository clone, you
-can install Pyperplan from the Python package index (PyPI):
+From the Python package index (PyPI):
 
     pip install pyperplan
 
-This makes the `pyperplan` script available globally or in your [virtual
+From inside a repository clone:
+
+    pip install --editable .
+
+This makes the `pyperplan` command available globally or in your [virtual
 environment](https://docs.python.org/3/tutorial/venv.html) (recommended).
 
 # Usage
 
-The planner is invoked through the file src/pyperplan.py and accepts two
-arguments: a PDDL domain file and a PDDL problem file. Example:
+The `pyperplan` executable accepts two arguments: a PDDL domain file and a
+PDDL problem file. Example:
 
-    ./src/pyperplan.py benchmarks/tpp/domain.pddl benchmarks/tpp/task01.pddl
+    pyperplan benchmarks/tpp/domain.pddl benchmarks/tpp/task01.pddl
 
 The domain file can be omitted, in which case the planner will attempt
 to guess its name based on the problem file. If a plan is found, it is
@@ -51,14 +45,14 @@ By default, the planner performs a blind breadth-first search, which
 does not scale very well. Heuristic search algorithms are available. For
 example, to use greedy-best-first search with the FF heuristic, run
 
-    ./src/pyperplan.py -H hff -s gbf DOMAIN PROBLEM
+    pyperplan -H hff -s gbf DOMAIN PROBLEM
 
 For a list of available search algorithms and heuristics, run
 
-    ./src/pyperplan.py --help
+    pyperplan --help
 
 For more information on using the planner and how to extend it to do
-more fancy stuff, see doc/documentation.md.
+more fancy stuff, see the [documentation](doc/documentation.md).
 
 # FAQs
 
@@ -87,8 +81,8 @@ The original authors of Pyperplan are, in alphabetical order:
 The instructors of the course in which Pyperplan was created were Malte
 Helmert and Robert Mattmüller.
 
-If you want to get in touch with us, please contact Robert Mattmüller or
-Jendrik Seipp. Their email addresses can easily be found on the web.
+For questions and feedback, please start a new
+[discussion](https://github.com/aibasel/pyperplan/discussions).
 
 # Citing Pyperplan
 

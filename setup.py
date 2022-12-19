@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 
-VERSION = "1.3"
+VERSION = "2.1"
 
 
 with open("README.md") as f:
@@ -18,13 +18,11 @@ setup(
     long_description_content_type="text/markdown",
     keywords="classical planning STRIPS",
     author="Jendrik Seipp",
-    author_email="jendrik.seipp@unibas.ch",
+    author_email="jendrik.seipp@liu.se",
     url="https://github.com/aibasel/pyperplan",
     license="GPL3+",
-    packages=find_packages("src"),
-    package_dir={"": "src"},
-    py_modules=["run"],
-    entry_points={"console_scripts": ["pyperplan = run:main"]},
+    packages=find_packages(exclude=["pyperplan.tests"]),
+    entry_points={"console_scripts": ["pyperplan = pyperplan.__main__:main"]},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
@@ -36,6 +34,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Topic :: Scientific/Engineering",
     ],
     install_requires=["wheel"],
