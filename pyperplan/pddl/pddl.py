@@ -97,7 +97,7 @@ class Action:
 
 
 class Domain:
-    def __init__(self, name, types, predicates, actions, constants={}):
+    def __init__(self, name, types, predicates, actions, constants={}, child_types_map={}, inv_constants_map={}, parent_types_map={} ):
         """
         name: The name of the domain
         types: A dict of typename->Type instances in the domain
@@ -110,6 +110,9 @@ class Domain:
         self.predicates = predicates
         self.actions = actions
         self.constants = constants
+        self.child_types_map = child_types_map
+        self.inv_constants_map = inv_constants_map
+        self.parent_types_map = parent_types_map
 
     def __repr__(self):
         return (
@@ -127,7 +130,7 @@ class Domain:
 
 
 class Problem:
-    def __init__(self, name, domain, objects, init, goal):
+    def __init__(self, name, domain, objects, init, goal, type_object_map={}):
         """
         name: The name of the problem
         domain: The domain in which the problem has to be solved
@@ -140,6 +143,9 @@ class Problem:
         self.objects = objects
         self.initial_state = init
         self.goal = goal
+        self.type_object_map = type_object_map
+
+
 
     def __repr__(self):
         return (
